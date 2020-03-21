@@ -1,0 +1,23 @@
+{
+  "name": "sass-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch assets/scss/style.scss assets/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmasalam/node-sass-starter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmasalam/node-sass-starter/issues"
+  },
+  "homepage": "https://github.com/kmasalam/node-sass-starter#readme",
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
+}

@@ -1,0 +1,287 @@
+@mixin flexDirection($flow) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @if $flow == "column" {
+      flex-flow: $flow;
+    } @else if $flow == "row" {
+      flex-flow: $flow;
+    } @else {
+      flex-flow: row-reverse;
+    }
+  }
+  @mixin transition($timing) {
+    transition: all $timing linear;
+  }
+$litle-limit: 575px;
+$small-limit: 767px;
+$medium-limit: 991px;
+$large-limit: 1199px;
+  @mixin respond-to($media) {
+    @if $media == allsmall {
+      @media only screen and (max-width: $small-limit) {
+        @content;
+      }
+    } @else if $media == little {
+      @media only screen and (max-width: $litle-limit) {
+        @content;
+      }
+    } @else if $media == littletosmall {
+      @media only screen and (min-width: $litle-limit + 1) and (max-width: $small-limit) {
+        @content;
+      }
+    } @else if $media == mdm {
+      @media only screen and (min-width: $small-limit + 1) and (max-width: $medium-limit) {
+        @content;
+      }
+    } @else if $media == larage {
+      @media only screen and (min-width: $medium-limit + 1) and (max-width: $large-limit) {
+        @content;
+      }
+    }
+  }
+@mixin inlineFlex{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin list {
+  padding: 0 12px;
+}
+@mixin list_anchor {
+  font-family: $rubik;
+  font-weight: $regular;
+  font-size: $fz12;
+  color: $c63;
+  padding: 10px 0;
+  display: block;
+  border-bottom: 1px solid $ce1e;
+  
+}
+@mixin cart_quantity {
+  .shopping_cart_options_minus{
+      font-size: $fz24;
+      color: $c36;
+      margin-right: 22px;
+      @include inlineFlex;
+      cursor: pointer;
+  }
+  .shopping_cart_options_display{
+      @extend .shopping_cart_options_minus;
+  }
+  .shopping_cart_options_plus{
+      @extend .shopping_cart_options_minus;
+  }
+}
+@mixin sparkti_checkbox{
+  margin-bottom: 15px;
+  position: relative;
+  @include flexDirection(row);
+  justify-content: flex-start;
+  input{
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      margin-right: 7px;
+      z-index: 9;
+      opacity: 0;
+      &:checked + label::after{
+          visibility: visible;
+          opacity: 1;
+      }
+  }
+  label{
+      font-size: $fz14;
+      color: $c63;
+      margin-bottom: 0;
+      &::before{
+          content: "";
+          position: absolute;
+          height: 15px;
+          width: 15px;
+          border-radius: 50%;
+          border: 1px solid $ce1e;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          z-index: 0;
+      }
+      &::after{
+          position: absolute;
+          top: 10px;
+          left: 3px;
+          transform: translateY(-50%);
+          z-index: 0;
+          visibility: visible;
+          opacity: 1;
+          content: "\f00c";
+          font-family: 'Line Awesome Free';
+          font-weight: 700;
+          visibility: hidden;
+          opacity: 0;
+          @include transition(.40s);
+      }
+  }
+}
+@mixin sparkti_social_icon{
+  @include inlineFlex;
+  padding-left: 0;
+  li{
+      &:not(:last-child){
+          margin-right: 20px;
+      }
+      a{
+          height: 40px;
+          width: 40px;
+          @include inlineFlex;
+          
+          i{
+              font-size: $fz24;
+              color: $cff;
+          }
+      }
+  }
+}
+@mixin btn_content($height,$padding,$font) {
+  background: $cff;
+  line-height: $height;
+  height: $height;
+  padding: 0 $padding;
+  font-family: $assistant;
+  font-weight: $bold;
+  text-transform: uppercase;
+  font-size: $font;
+  color: $c36; 
+  display: inline-flex;
+}
+@mixin no_out_box {
+    outline: none;
+    box-shadow: none;
+}
+@mixin sparkti_brand_carousel{
+  margin: 20px -10px 20px -10px;
+  .sparkti_brand_carousel_item{
+      margin: 0 10px;
+      img{}
+  }     
+}
+
+@mixin sparkti_section_heading{
+  border: 1px solid $ce1e;
+  background: $cf7f;
+  @include flexDirection(row);
+  padding-right: 15px;
+  justify-content: space-between;
+  @include respond-to(mdm) {
+    padding-right: 10px;
+  }
+  @include respond-to(little){
+    flex-flow: column;
+    padding-right: 0;
+  }
+  &__content{
+      background: $c6c8;
+      font-size: $fz22;
+      color: $cff;
+      font-weight: $medium;
+      @include inlineFlex;
+      padding: 0 30px 0 15px;
+      line-height: 50px;
+      @include respond-to(larage) {
+        font-size: $fz14;
+        padding: 0 20px 0 10px;
+      }
+      @include respond-to(mdm) {
+        font-size: $fz14;
+        padding: 0 20px 0 10px;
+      }
+      @include respond-to(allsmall){
+        font-size: 14px;
+      }
+      @include respond-to(little){
+        width: 100%;
+      }
+      i{
+          color: $cff;
+          font-size: $fz32;
+          display: inline-block;
+          padding-right: 5px;
+          @include respond-to(larage) {
+            font-size:  $fz18;
+          }
+          @include respond-to(mdm) {
+            font-size: $fz14;
+          }
+      }
+  }
+  &__categories{
+      ul{
+          @include flexDirection(row);
+          margin-bottom: 0;
+          padding-left: 0;
+          @include respond-to(larage) {
+            flex-wrap: wrap;
+          }
+          @include respond-to(mdm){
+            flex-wrap: wrap;
+            margin-left: 15px;
+          }
+          @include respond-to(little){
+            padding-left: 0;
+          flex-wrap: wrap;
+          margin-left: 15px;
+          justify-content: flex-start;
+          }
+          li{
+              position: relative;
+              @include respond-to(mdm){
+                flex: 0 0 100%;
+                max-width: 100%;
+              }
+              @include respond-to(little){
+                flex: 0 0 50%;
+                max-width: 50%;
+                margin-right: 0;
+              }
+
+              &:not(:last-child){
+                  margin-right: 20px;
+                  @include respond-to(mdm){
+                      margin-right: 0;
+                  }
+                  @include respond-to(little){
+                    margin-right: 0px;
+                  }
+                  &:after{
+                      content: "";
+                      position: absolute;
+                      right: -10px;
+                      top: 50%;
+                      transform: translateY(-50%);
+                      height: 3px;
+                      width: 3px;
+                      background: $c63;
+                      @include respond-to(mdm){
+                          display: none;
+                      }
+                      @include respond-to(little){
+                        display: none;
+                      }
+                  }
+              }
+              a{
+                  font-family: $rubik;
+                  color: $c63;
+                  font-size: $fz14;
+                  @include respond-to(larage) {
+                    font-size: $fz12;
+                  }
+                  @include respond-to(mdm) {
+                    font-size: $fz12;
+                  }
+              }
+          }
+      }
+  }
+}
